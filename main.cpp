@@ -1,7 +1,6 @@
 #include "miniwin.h"
 #include <string>
 
-
 using namespace miniwin;
 using namespace std;
 
@@ -14,6 +13,24 @@ using namespace std;
             rectangulo_lleno(23+xx,0+yy,27+xx,10+yy);
         }
     }
+
+//Para detectar colisiones entre el jugador y los enemigos
+bool colision(int jugadorX, int jugadorY, int enemigoX, int enemigoY) {
+    // Definir las dimensiones de la nave del jugador
+    int jugadorAncho = 10;  // Ancho de la nave del jugador
+    int jugadorAlto = 50;   // Alto de la nave del jugador
+
+    // Definir las dimensiones del enemigo
+    int enemigoAncho = 8;    // Ancho del enemigo (ajusta según sea necesario)
+    int enemigoAlto = 15;    // Alto del enemigo (ajusta según sea necesario)
+
+    // Verificar si hay superposición
+    return (jugadorX < enemigoX + enemigoAncho &&
+            jugadorX + jugadorAncho > enemigoX &&
+            jugadorY < enemigoY + enemigoAlto &&
+            jugadorY + jugadorAlto > enemigoY);
+}
+
 
 
 void xwing(int x, int y) {
@@ -182,6 +199,9 @@ void xwing(int x, int y) {
 
         int t = tecla();
 
+        int enemigosRestantes = 3; // Número inicial de enemigos
+
+
         // Movimiento de la nave
         while (t != ESCAPE) {
 
@@ -322,6 +342,13 @@ void xwing(int x, int y) {
                 if (yy >= 10 && yy <= 45) {
                     v3 = -30; z3 = -45;  // Destruir la nave 3
                 }
+            }
+
+            // Verificar colisión con enemigos
+            if (colision(x, y, v1, z1) || colision(x, y, v2, z2) || colision(x, y, v3, z3)) {
+                // Aquí puedes mostrar un mensaje o terminar el juego
+                cout << " COLISION DETECTADA! El juego ha terminado." << endl;
+                break; // Salir del bucle
             }
 
 

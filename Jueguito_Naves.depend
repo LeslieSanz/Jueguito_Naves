@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1728428442 source:c:\universidad\ciclo #7\programación de videojuegos con c\jueguito_2d\jueguito_naves\miniwin.cpp
+	<fstream>
+	<sstream>
+	<queue>
+	<math.h>
+	<process.h>
+	<windows.h>
+	<windowsx.h>
+	"miniwin.h"
+	<cstdio>
+	<cstdlib>
+	<iostream>
+	<string>
+	<queue>
+	<X11/Xlib.h>
+	<X11/Xutil.h>
+	<X11/Xos.h>
+	<X11/Xatom.h>
+	<X11/keysym.h>
+	"miniwin.h"
+
+1461821620 c:\universidad\ciclo #7\programación de videojuegos con c\jueguito_2d\jueguito_naves\miniwin.h
+	<iostream>
+
