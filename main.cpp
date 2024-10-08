@@ -1,3 +1,4 @@
+#include <iostream>
 #include "miniwin.h"
 #include <string>
 
@@ -9,7 +10,7 @@ using namespace std;
         if(yy == 400 | yy==0){
             color_rgb(0,0,0);
         }else{
-            color_rgb(255,242,0);
+            color_rgb(0, 255, 255);
             rectangulo_lleno(23+xx,0+yy,27+xx,10+yy);
         }
     }
@@ -185,6 +186,10 @@ void xwing(int x, int y) {
         // Variables de coordenadas de la nave
         int x = 200, y =400;
 
+        // Variables para el nombre
+        string nombre = "Leslie";
+        string apellido = "Sanchez";
+
         // Variables de coordenadas de la bala de la nave
         int xx = 200, yy = 400;
 
@@ -327,6 +332,7 @@ void xwing(int x, int y) {
             if (xx >= v1 - 30 && xx <= v1) {
                 if (yy >= 10 && yy <= 45) {
                     v1 = -30; z1 = -45;  // Destruir la nave 1
+                    enemigosRestantes--; // Decrementar contador de enemigos
                 }
             }
 
@@ -334,6 +340,7 @@ void xwing(int x, int y) {
             if (xx >= v2 - 30 && xx <= v2) {
                 if (yy >= 10 && yy <= 45) {
                     v2 = -30; z2 = -45;  // Destruir la nave 2
+                    enemigosRestantes--; // Decrementar contador de enemigos
                 }
             }
 
@@ -341,6 +348,7 @@ void xwing(int x, int y) {
             if (xx >= v3 - 30 && xx <= v3) {
                 if (yy >= 10 && yy <= 45) {
                     v3 = -30; z3 = -45;  // Destruir la nave 3
+                    enemigosRestantes--; // Decrementar contador de enemigos
                 }
             }
 
@@ -348,6 +356,12 @@ void xwing(int x, int y) {
             if (colision(x, y, v1, z1) || colision(x, y, v2, z2) || colision(x, y, v3, z3)) {
                 // Aquí puedes mostrar un mensaje o terminar el juego
                 cout << " COLISION DETECTADA! El juego ha terminado." << endl;
+                break; // Salir del bucle
+            }
+
+              // Verificar si se han eliminado todos los enemigos
+            if (enemigosRestantes <= 0) {
+                cout << " FELICIDADES, GANASTE!" << endl;
                 break; // Salir del bucle
             }
 
@@ -360,6 +374,12 @@ void xwing(int x, int y) {
             enemigo3(v3, z3);  // Dibuja la nave enemiga 3
             balaprota(xx, yy);
             xwing(x, y);
+
+            //Texto debajo de la nave
+            color_rgb(255, 255, 0);
+            texto(static_cast<float>(x), static_cast<float>(y + 55), nombre);
+            texto(static_cast<float>(x), static_cast<float>(y + 70), apellido);
+
             refresca();
             espera(10);
 
