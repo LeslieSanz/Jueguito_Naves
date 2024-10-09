@@ -1,6 +1,10 @@
 #include <iostream>
 #include "miniwin.h"
 #include <string>
+#include <windows.h>
+#include <mmsystem.h>
+#pragma comment(lib, "winmm.lib")  // Vincula la librería winmm.lib
+
 
 using namespace miniwin;
 using namespace std;
@@ -16,21 +20,21 @@ using namespace std;
     }
 
 //Para detectar colisiones entre el jugador y los enemigos
-bool colision(int jugadorX, int jugadorY, int enemigoX, int enemigoY) {
-    // Definir las dimensiones de la nave del jugador
-    int jugadorAncho = 10;  // Ancho de la nave del jugador
-    int jugadorAlto = 50;   // Alto de la nave del jugador
+    bool colision(int jugadorX, int jugadorY, int enemigoX, int enemigoY) {
+        // Definir las dimensiones de la nave del jugador
+        int jugadorAncho = 10;  // Ancho de la nave del jugador
+        int jugadorAlto = 50;   // Alto de la nave del jugador
 
-    // Definir las dimensiones del enemigo
-    int enemigoAncho = 8;    // Ancho del enemigo (ajusta según sea necesario)
-    int enemigoAlto = 15;    // Alto del enemigo (ajusta según sea necesario)
+        // Definir las dimensiones del enemigo
+        int enemigoAncho = 8;    // Ancho del enemigo (ajusta según sea necesario)
+        int enemigoAlto = 15;    // Alto del enemigo (ajusta según sea necesario)
 
-    // Verificar si hay superposición
-    return (jugadorX < enemigoX + enemigoAncho &&
-            jugadorX + jugadorAncho > enemigoX &&
-            jugadorY < enemigoY + enemigoAlto &&
-            jugadorY + jugadorAlto > enemigoY);
-}
+        // Verificar si hay superposición
+        return (jugadorX < enemigoX + enemigoAncho &&
+                jugadorX + jugadorAncho > enemigoX &&
+                jugadorY < enemigoY + enemigoAlto &&
+                jugadorY + jugadorAlto > enemigoY);
+    }
 
 
 
@@ -182,6 +186,9 @@ void xwing(int x, int y) {
     int main() {
         vredimensiona(500, 500);
 
+        // Reproducir el sonido de fondo en bucle
+        PlaySound(TEXT("sonidos/fondo.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+
 
         // Variables de coordenadas de la nave
         int x = 200, y =400;
@@ -317,6 +324,9 @@ void xwing(int x, int y) {
             if (t == ESPACIO && yy <= 0) {
                 xx = x;
                 yy = y;
+
+                 // Reproducir sonido de disparo
+                PlaySound(TEXT("sonidos/disparo.wav"), NULL, SND_FILENAME | SND_ASYNC);
             }
 
             if (t == ESPACIO) {
